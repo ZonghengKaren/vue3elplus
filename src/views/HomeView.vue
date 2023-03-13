@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    {{state.data}}
+    {{state.data}}-------{{plusOne}}
     <div @click="bindClick">新增</div>
     <div @click="$router.push('/about')">跳转</div>
     <el-button type="primary" @click.stop="goAbout">事件跳转</el-button>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {ref, onMounted} from "vue";
+import {ref, onMounted, computed, watch} from "vue";
 import service from "@/utils/http";
 import router from '@/router'
 
@@ -30,6 +30,23 @@ export default {
       getdata();
       getdata2();
     })
+
+    /**
+     * 监听属性
+     */
+    const plusOne = computed(() =>  state.value.data + 1 );
+
+    /**
+     * 监听属性
+     */
+    watch(
+        () => [state.value.data, datalist.value],
+        async (newValue, oldValue) => {
+          // newValue === oldValue
+          console.log(newValue, oldValue)
+        },
+        { deep: true}
+    )
 
     let getdata = async () => {
         const res = await service.get('/users');
@@ -59,6 +76,7 @@ export default {
     return {
       state,
       datalist,
+      plusOne,
       bindClick,
       goAbout
     }
