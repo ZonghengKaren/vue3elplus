@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import {ref, onMounted, computed, watch} from "vue";
+import {ref, onMounted, computed, watch } from "vue";
+import { useStore } from "vuex";
 import service from "@/utils/http";
 import router from '@/router'
 
@@ -47,6 +48,12 @@ export default {
         },
         { deep: true}
     )
+
+    /**
+     * 状态管理
+     */
+    const store = useStore();
+    console.log(store.state.status);
 
     let getdata = async () => {
         const res = await service.get('/users');
