@@ -1,11 +1,15 @@
 
 const state = () => ({
+    title: '55555',
     loading: false,     // iframe 的loading
     status: 1,      // 登录过的值为2
     travelWebPath: '',
 });
 
 const mutations = {
+    SET_TRAVEL_TITLE: (state, data) => {
+        state.title = data
+    },
     SET_TRAVEL_WEBPATH: (state, travelWebPath) => {
         state.travelWebPath = travelWebPath
     },

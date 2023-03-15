@@ -1,9 +1,13 @@
 import { createStore } from 'vuex'
+import persistedState from 'vuex-persistedstate'
 import test from './test'
 
 export default createStore({
+  plugins: [
+    persistedState({ storage: window.sessionStorage })
+  ],
   state: {
-    status: '333'
+    title: '333'
   },
   getters: {
   },

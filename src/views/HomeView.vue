@@ -1,6 +1,9 @@
 <template>
   <div class="home">
     {{state.data}}-------{{plusOne}}
+    <div>vuex: 全局title {{$store.state.title}}</div>
+    <div>vuex: 模块test 里面的title {{$store.state.test.title}} ---- {{store_title}}</div>
+    <div @click="editTitle">修改vuex-test模块的title</div>
     <div @click="bindClick">新增</div>
     <div @click="$router.push('/about')">跳转</div>
     <el-button type="primary" @click.stop="goAbout">事件跳转</el-button>
@@ -53,7 +56,7 @@ export default {
      * 状态管理
      */
     const store = useStore();
-    console.log(store.state.status);
+    console.log(store.state.title);
 
     let getdata = async () => {
         const res = await service.get('/users');
@@ -72,6 +75,9 @@ export default {
     const bindClick = () => {
       state.value.data += 2
     }
+    const editTitle = () => {
+      store.commit('SET_TRAVEL_TITLE', 77777)
+    }
 
     /**
      * 跳转函数 - 跳转到关于我们
@@ -84,7 +90,9 @@ export default {
       state,
       datalist,
       plusOne,
+      store_title: computed(() => store.state.test.title),
       bindClick,
+      editTitle,
       goAbout
     }
   }
