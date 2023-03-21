@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     {{state.data}}-------{{plusOne}}
-    <div>vuex: 全局title {{$store.state.title}}</div>
+    <div class="vuex-fontszie">vuex: 全局title {{$store.state.title}}</div>
     <div>vuex: 模块test 里面的title {{$store.state.test.title}} ---- {{store_title}}</div>
     <div @click="editTitle">修改vuex-test模块的title</div>
     <div @click="bindClick">新增</div>
@@ -98,3 +98,11 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.vuex-fontszie {
+  width: 1rem;
+  background-color: #2c3e50;
+  border-radius: 50%;
+  font-size: 0.12rem;
+}
+</style>
