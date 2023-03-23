@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div>
+      <el-button type="primary" @click="$router.push('/elform')">表单验证</el-button>
+    </div>
     {{state.data}}-------{{plusOne}}
     <div class="vuex-fontszie">vuex: 全局title {{$store.state.title}}</div>
     <div>vuex: 模块test 里面的title {{$store.state.test.title}} ---- {{store_title}}</div>

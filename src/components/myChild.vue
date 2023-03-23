@@ -4,15 +4,19 @@
     <div>data: {{state.data}}</div>
     <div>arr: {{state.arr}}</div>
     <div>syncData: {{state.syncData}}</div>
+    <div>str: {{str}}</div>
     <div @click="bindChangParent">props: arr1 - {{props.arr1 ? props.arr1[0] : '---空数据--'}}</div>
     <div>---------------------childsaon-----------------</div>
-    <myChildSon :syncData="state.syncData" @update:syncData="state.syncData = $event"></myChildSon>
+    <div @click="bindCurrentInstance">点击获取子组件示例</div>
+    <myChildSon ref="refMyChildSon" :syncData="state.syncData" @update:changesyncData="state.syncData = $event"></myChildSon>
   </div>
 </template>
 
 <script setup>
-import {reactive, defineProps, defineEmits} from 'vue'
+import {reactive, defineProps, defineEmits, ref} from 'vue'
 import myChildSon from '@/components/myChildSon.vue'
+
+const refMyChildSon = ref(null);
 const state = reactive({
   count:1,
   data: {
@@ -21,6 +25,7 @@ const state = reactive({
   arr:[3333],
   syncData: 'aaaaa'
 })
+const str = '这个是不需要响应时的数据';
 const props = defineProps({
   arr1: {
     type: Array,
@@ -34,6 +39,12 @@ const bindChangParent = () => {
   state.count++;
   state.data.b = 'rrrrr';
   state.arr[1] = '55555';
+}
+
+const bindCurrentInstance = () => {
+  // console.log(currentInstance.refs.myChildSon.count)
+  refMyChildSon.value.changUpdate();
+  refMyChildSon.value.state.count++;
 }
 </script>
 

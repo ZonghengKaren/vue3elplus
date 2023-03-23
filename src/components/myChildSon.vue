@@ -6,7 +6,8 @@
 </template>
 
 <script setup>
-import {reactive, defineEmits} from 'vue'
+import {reactive, defineEmits, defineExpose} from 'vue';
+
 const state = reactive({
   count:1,
   data: {
@@ -15,12 +16,17 @@ const state = reactive({
   arr:[3333]
 })
 
-const emits = defineEmits(['update:syncData'])
+const emits = defineEmits(['update:changesyncData'])
 
 const changUpdate = () => {
-  emits('update:syncData', 'vvvvvvv');
+  emits('update:changesyncData', 'vvvvvvv');
   console.log(34324);
 }
+
+defineExpose({
+  changUpdate,
+  state
+})
 </script>
 
 <style lang="scss" scoped>
