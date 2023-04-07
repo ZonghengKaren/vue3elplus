@@ -34,8 +34,6 @@
 </template>
 
 <script setup>
-import {reactive, ref} from 'vue'
-// import { FormInstance, FormRules } from 'element-plus'
 
 const ruleFormRef = ref(null);
 

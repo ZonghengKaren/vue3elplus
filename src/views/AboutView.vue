@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import {reactive, toRefs, onMounted} from 'vue'
 import myChild from '@/components/myChild.vue'
 
 export default {

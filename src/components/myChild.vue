@@ -5,6 +5,7 @@
     <div>arr: {{state.arr}}</div>
     <div>syncData: {{state.syncData}}</div>
     <div>str: {{str}}</div>
+    <div>vuex-aa: {{aa}}</div>
     <div @click="bindChangParent">props: arr1 - {{props.arr1 ? props.arr1[0] : '---空数据--'}}</div>
     <div>---------------------childsaon-----------------</div>
     <div @click="bindCurrentInstance">点击获取子组件示例</div>
@@ -39,6 +40,15 @@ const bindChangParent = () => {
   state.data.b = 'rrrrr';
   state.arr[1] = '55555';
 }
+
+const aa = computed(() => { return useStore().state.test.title})
+watch(
+    () =>  ['state.count'],
+    (oldVal, newVal) => {
+      console.log(oldVal, newVal)
+    },
+    { immediate: true}
+)
 
 const bindCurrentInstance = () => {
   // console.log(currentInstance.refs.myChildSon.count)

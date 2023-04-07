@@ -65,6 +65,7 @@
     "watchSyncEffect": true,
     "defineProps": true,
     "defineEmits": true,
-    "defineExpose": true
+    "defineExpose": true,
+    "useStore": true
   }
 }
