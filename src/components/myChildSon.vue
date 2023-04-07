@@ -6,7 +6,6 @@
 </template>
 
 <script setup>
-import {reactive, defineEmits, defineExpose} from 'vue';
 
 const state = reactive({
   count:1,

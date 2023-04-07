@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import {reactive, defineProps, defineEmits, ref} from 'vue'
 import myChildSon from '@/components/myChildSon.vue'
 
 const refMyChildSon = ref(null);
