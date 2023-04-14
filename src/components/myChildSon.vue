@@ -3,6 +3,7 @@
     <div>这是myChildSon</div>
     <div class="myChild">
       <div>count: {{state.count}}</div>
+      <div >injectA: {{injectA}} <el-button type="primary" @click="bindEdit">修改provide</el-button> </div>
       <div @click="changUpdate">使用update 修改父级数据</div>
     </div>
 
@@ -28,14 +29,22 @@
   </div>
 </template>
 <script setup>
+
 const state = reactive({
   count:1,
   data: {
     a: '222'
   },
   arr:[3333],
-  dialogVisible: false
+  dialogVisible: false,
+  color: 'red'
 })
+
+let injectA = inject('provideA');
+let editProvideA = inject('editProvideA');
+const bindEdit = () => {
+  editProvideA('443353');
+}
 
 const emits = defineEmits(['update:changesyncData'])
 
@@ -51,5 +60,7 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-
+.myChild {
+  color: v-bind('state.color')
+}
 </style>
