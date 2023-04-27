@@ -19,6 +19,11 @@ const routes = [
     path: '/elform',
     name: 'elform',
     component: () => import('@/views/ElForm.vue')
+  },
+  {
+    path: '/otherTest',
+    name: 'otherTest',
+    component: () => import('@/views/OtherTest.vue')
   }
 ]
 
