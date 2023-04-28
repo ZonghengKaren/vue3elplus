@@ -20,7 +20,7 @@
 <script>
 
 import { useStore } from "vuex";
-import service from "@/utils/http/http";
+import service from "@/utils/http";
 import router from '@/router'
 
 export default {
@@ -64,14 +64,14 @@ export default {
     let getdata = async () => {
         const res = await service.get('/users');
         console.log(res);
-        datalist.value = res.data;
+        datalist.value = res;
         const arr = datalist.value.map((item) => {return item.username});
         console.log(arr);
     }
 
     let getdata2 = async () => {
       const res = await service.get('/posts');
-      datalist2.value = res.data;
+      datalist2.value = res;
       console.log(datalist2);
     }
 
