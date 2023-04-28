@@ -20,7 +20,7 @@
 <script>
 
 import { useStore } from "vuex";
-import service from "@/utils/http";
+import service from "@/utils/http/http";
 import router from '@/router'
 
 export default {

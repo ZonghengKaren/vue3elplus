@@ -1,22 +1,32 @@
 <template>
     <div class="otherTest">
+
+        <!--clickOutSide-->
         <div class="otherTest-outSideClick">
-            <el-button type="primary" size="small" @click="bindOutSideClick" v-on-click-outside="onClickOutside">outSideClick</el-button>
+            <el-button type="primary" size="small" @click="bindOutSideClick" v-onClickOutside="onClickOutside">outSideClick</el-button>
             <div class="otherTest-outSideClickBox" v-show="showBoxVisible"></div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { vOnClickOutside } from '@vueuse/components'
-let showBoxVisible = ref(false);
+let showBoxVisible = ref(false); // outSideClick
+
+// outSideClick相关
+/**
+ * 事件函数 - 点击outSideClick按钮
+ */
 const bindOutSideClick = () => {
     console.log('我点了outSideClick');
     showBoxVisible.value = true;
 }
+/**
+ * 事件函数 - 点击outSideClick按钮
+ */
 const onClickOutside = () => {
     console.log('我点了bodyle ');
 }
+
 </script>
 
 <style lang="scss" scoped>
