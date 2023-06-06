@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="about">
     <div>
       {{data1.conut}} --- {{data1.count2}} --- {{arr1}}
     </div>
@@ -39,6 +39,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="less" scoped>
+.about {
+  background-color: @primary-bg-color;
+  color: @primary-text-color;
+}
 </style>

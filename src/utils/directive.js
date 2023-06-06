@@ -1,7 +1,10 @@
-import { vOnClickOutside } from '@vueuse/components'
-
-export default {
-    
-    // 点击除当前节点以外的区域
-    onClickOutside: vOnClickOutside,
-}
+export const test = {
+  mounted (el, bindling, Vnode) {
+    console.log(Vnode);
+    el.addEventListener('click', () => {
+      console.log('el:', el);
+      console.log('bindling:', bindling);
+      console.log('Vnode:', Vnode);
+    }, false)
+  }
+};

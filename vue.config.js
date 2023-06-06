@@ -17,5 +17,14 @@ module.exports = defineConfig({
         }
       })
     ]
+  },
+  css: {
+    
+    // 默认加载全局样式
+    loaderOptions: {
+      less: {
+        additionalData: `@import "@/assets/themes/index.less";`
+      }
+    }
   }
 })
