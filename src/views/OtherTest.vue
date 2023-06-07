@@ -46,7 +46,6 @@ onMounted(() => {
     console.log(typeof str);
     console.log(Object.prototype.toString.call(str));
     console.log(Object.prototype.toString.call(str) === '[object Number]');
-    changeTheme('black');
 })
 
 // outSideClick相关
