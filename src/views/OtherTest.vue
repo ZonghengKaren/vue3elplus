@@ -9,13 +9,27 @@
         
         <!--clickOutSide-->
         <div class="otherTest-outSideClick">
+            clickOutSide------------
             <el-button type="primary" size="small" @click="bindOutSideClick" v-onClickOutside="onClickOutside">outSideClick</el-button>
             <el-collapse-transition>
                 <div class="otherTest-outSideClickBox" v-show="showBoxVisible"></div>
             </el-collapse-transition>
         </div>
 
-        <el-button type="primary" size="small" v-test="showBoxVisible">v-test</el-button>
+        <!--directive-->
+        <div>
+            directive-----------
+            <el-button type="primary" size="small" v-test="showBoxVisible">v-test</el-button>
+        </div>
+        
+        <!--Transition-->
+        <div>
+            Transition----------
+            <el-button type="primary" size="small" @click="transitionVisible = !transitionVisible">Toggle</el-button>
+            <Transition name="transitionTest">
+                <p v-show="transitionVisible">Hello here is some bouncy text!</p>
+            </Transition>
+        </div>
     </div>
 </template>
 
@@ -23,6 +37,7 @@
 import {changeTheme} from "@/utils/common";
 
 let showBoxVisible = ref(false); // outSideClick
+let transitionVisible = ref(true); // Transition
 let themes = [
     {
         label: 'black',
@@ -46,6 +61,7 @@ onMounted(() => {
     console.log(typeof str);
     console.log(Object.prototype.toString.call(str));
     console.log(Object.prototype.toString.call(str) === '[object Number]');
+    myFun();
 })
 
 // outSideClick相关
@@ -70,6 +86,55 @@ const onClickOutside = () => {
  */
 const bindChangeTheme = (item) => {
     changeTheme(item.label);
+}
+
+/**
+ * 自定义函数 - 其他测试方法
+ */
+const myFun = () => {
+    // for in 和 for of 区别
+    // const arr = [{title: '1'}, {title: '2'}, {title: '3'}];
+    // for ( let i in arr) {
+    //     console.log(i);
+    // }
+    // const obj = {a:1, b: 2};
+    // for (let i of obj) {
+    //     console.log(i);
+    // }
+
+    // promise.all 和 promise.race 区别
+    // let p1 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         reject('p1成功')
+    //     }, 3000)
+    // })
+    // let p2 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         reject('p2成功')
+    //     }, 2000)
+    // })
+    // let p3 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         reject('p3失败')
+    //     }, 4000)
+    // })
+    //
+    // let p4 = new Promise((resolve) => {
+    //     setTimeout(() => {
+    //         resolve('p4失败')
+    //     }, 1000)
+    // })
+    //
+    // let p5 = Promise.race([p1, p2, p3, p4])
+    // p5.then(res => {
+    //     console.log('res:', res);
+    // }).catch(err => {
+    //     console.log('err:', err);  
+    // })
+    
+    //Object.entries() 使用
+    const obj2 = {a:1, b:2, c: 3}
+    console.log(Object.entries(obj2))
 }
 
 </script>
@@ -108,5 +173,34 @@ const bindChangeTheme = (item) => {
 }
 .themeText {
     color: @primary-text-color;
+}
+
+/*动画 测试*/
+.transitionTest-enter-active {
+    animation: transitionTest-in 0.5s;
+}
+.transitionTest-leave-active {
+    animation: transitionTest-in 0.5s reverse;
+}
+@keyframes transitionTest-in {
+    //0% {
+    //    transform: scale(0);
+    //}
+    //50% {
+    //    transform: scale(1.25);
+    //}
+    //100% {
+    //    transform: scale(1);
+    //}
+
+    0% {
+        transform: scale(0) translate(1000px);
+    }
+    50% {
+        transform: scale(1.25) translate(-100px);
+    }
+    100% {
+        transform: scale(1) translate(0);
+    }
 }
 </style>

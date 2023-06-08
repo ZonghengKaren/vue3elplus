@@ -10,7 +10,10 @@
     <div @click="bindChangParent">props: arr1 - {{props.arr1 ? props.arr1[0] : '---空数据--'}}</div>
     <div>---------------------childsaon-----------------</div>
     <div @click="bindCurrentInstance">点击获取子组件示例</div>
-    <myChildSon ref="refMyChildSon" :syncData="state.syncData" @update:changesyncData="state.syncData = $event"></myChildSon>
+    <myChildSon ref="refMyChildSon" v-model="state.syncData">
+      <template #header><span>this is header</span></template>
+      <template #con><span>this is con</span></template>
+    </myChildSon>
   </div>
 </template>
 

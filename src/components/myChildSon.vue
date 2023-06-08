@@ -1,9 +1,14 @@
 <template>
   <div>
+    <slot name="header"></slot>
+    <div>-----</div>
+    <slot name="con"></slot>
+    <div>--------------------------------------------------</div>
     <div>这是myChildSon</div>
     <div class="myChild">
       <div>count: {{state.count}}</div>
       <div >injectA: {{injectA}} <el-button type="primary" @click="bindEdit">修改provide</el-button> </div>
+      <div>prpos: {{prpos.modelValue}}</div>
       <div @click="changUpdate">使用update 修改父级数据</div>
     </div>
 
@@ -39,17 +44,22 @@ const state = reactive({
   dialogVisible: false,
   color: 'red'
 })
-
+const prpos = defineProps({
+  modelValue: {
+    type: Object,
+    default: () => {}
+  }
+})
 let injectA = inject('provideA');
 let editProvideA = inject('editProvideA');
 const bindEdit = () => {
   editProvideA('443353');
 }
 
-const emits = defineEmits(['update:changesyncData'])
+const emits = defineEmits(['update:modelValue'])
 
 const changUpdate = () => {
-  emits('update:changesyncData', 'vvvvvvv');
+  emits('update:modelValue', 'vvvvvvv');
   console.log(34324);
 }
 
