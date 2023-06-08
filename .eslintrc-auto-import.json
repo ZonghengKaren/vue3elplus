@@ -66,6 +66,7 @@
     "defineProps": true,
     "defineEmits": true,
     "defineExpose": true,
-    "useStore": true
+    "useStore": true,
+    "storeToRefs": true
   }
 }

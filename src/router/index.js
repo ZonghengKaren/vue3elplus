@@ -24,6 +24,11 @@ const routes = [
     path: '/otherTest',
     name: 'otherTest',
     component: () => import('@/views/OtherTest.vue')
+  },
+  {
+    path: '/pinia',
+    name: 'pinia',
+    component: () => import('@/views/PiniaTest.vue')
   }
 ]
 
