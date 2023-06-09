@@ -7,7 +7,7 @@
 
 <script setup>
 import {useMyStore} from "@/store/piniaTest";
-const { count: piniaCount } = storeToRefs(useMyStore());
+const { count: piniaCount } = computed(() => storeToRefs(useMyStore())) ;
 
 /**
  * 事件函数 -  修改pinia 数据

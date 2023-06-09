@@ -5,6 +5,11 @@ export const useMyStore = defineStore({
     count: 0,
     name: ''
   }),
+  getters: {
+    getterCount() {
+      return this.count;
+    }
+  },
   actions: {
     increment(res) {
       this.count += Number(res);
