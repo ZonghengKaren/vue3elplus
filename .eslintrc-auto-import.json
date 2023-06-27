@@ -67,6 +67,9 @@
     "defineEmits": true,
     "defineExpose": true,
     "useStore": true,
-    "storeToRefs": true
+    "storeToRefs": true,
+    "mapActions": true,
+    "mapGetters": true,
+    "mapState": true
   }
 }
