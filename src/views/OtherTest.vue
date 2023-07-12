@@ -21,6 +21,9 @@
             directive-----------
             <el-button type="primary" size="small" v-test="showBoxVisible">v-test</el-button>
         </div>
+        <div v-resize="bindResze">
+
+        </div>
         
         <!--Transition-->
         <div>
@@ -72,6 +75,14 @@ const bindOutSideClick = () => {
     console.log('我点了outSideClick');
     showBoxVisible.value = true;
 }
+
+/**
+ * 事件函数 - 监听元素宽高变化
+ */
+const bindResze = () => {
+  console.log(666666);
+}
+
 /**
  * 事件函数 - 点击outSideClick按钮
  */

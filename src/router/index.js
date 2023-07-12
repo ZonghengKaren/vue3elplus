@@ -25,11 +25,11 @@ const routes = [
     name: 'otherTest',
     component: () => import('@/views/OtherTest.vue')
   },
-  {
-    path: '/pinia',
-    name: 'pinia',
-    component: () => import('@/views/PiniaTest.vue')
-  }
+  // {
+  //   path: '/pinia',
+  //   name: 'pinia',
+  //   component: () => import('@/views/PiniaTest.vue')
+  // }
 ]
 
 const router = createRouter({
