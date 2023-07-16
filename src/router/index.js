@@ -25,6 +25,11 @@ const routes = [
     name: 'otherTest',
     component: () => import('@/views/OtherTest.vue')
   },
+  {
+    path: '/csstest',
+    name: 'CssTest',
+    component: () => import('@/views/CssTest.vue')
+  },
   // {
   //   path: '/pinia',
   //   name: 'pinia',
