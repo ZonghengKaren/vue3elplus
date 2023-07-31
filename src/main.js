@@ -20,5 +20,9 @@ app.directive('onClickOutside', vOnClickOutside);
 app.directive('test', test);
 app.directive('resize', resize);
 
+app.config.errorHandler = (err) => {
+    console.log('err:', err);
+}
+
 // app.use(store).use(pinia).use(router).mount('#app')
 app.use(store).use(router).mount('#app')

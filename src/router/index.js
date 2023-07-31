@@ -34,11 +34,17 @@ const routes = [
   //   path: '/pinia',
   //   name: 'pinia',
   //   component: () => import('@/views/PiniaTest.vue')
-  // }
+  // },
+  {
+    path: '/:pathMatch(.*)',
+    name: '/NotFound',
+    component: () => import('@/views/NotFound.vue')
+  },
 ]
 
 const router = createRouter({
-  history: createWebHashHistory('#/app/'),
+  // history: createWebHashHistory('#/app/'),
+  history: createWebHashHistory(),
   routes
 })
 
