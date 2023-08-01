@@ -47,5 +47,8 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-
+// router.beforeEach(async (to, from, next) => {
+//
+// })
+// router.addRoute({})
 export default router
