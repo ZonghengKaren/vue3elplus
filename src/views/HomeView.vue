@@ -62,17 +62,27 @@ export default {
     console.log(store.state.title);
 
     let getdata = async () => {
+      try {
         const res = await service.get('/users');
         console.log(res);
         datalist.value = res;
         const arr = datalist.value.map((item) => {return item.username});
         console.log(arr);
+      } catch (err) {
+        console.log(err)
+      }
+
     }
 
     let getdata2 = async () => {
-      const res = await service.get('/posts');
-      datalist2.value = res;
-      console.log(datalist2);
+      try {
+        const res = await service.get('/posts');
+        datalist2.value = res;
+        console.log(datalist2);
+      } catch (err) {
+        console.log(err);
+      }
+
     }
 
     const bindClick = () => {

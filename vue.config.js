@@ -4,7 +4,19 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     open: true,
-    hot: true
+    hot: true,
+    proxy: {
+      //设置代理
+      '/json': {
+        target: 'http://jsonplaceholder.typicode.com',
+        changeOrigin: true,
+        logLevel: 'debug',
+        secure: false, //如果是http接口，需要配置该参数
+        pathRewrite: {
+          '^/json': ''
+        }
+      }
+    }
   },
   configureWebpack: {
     plugins: [

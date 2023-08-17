@@ -23,6 +23,11 @@
             set();
             window.addEventListener('resize', set);
         }());
+
+        function fun() {
+            console.log(this.location);
+        }
+        fun();
     </script>
 </head>
 <body>
