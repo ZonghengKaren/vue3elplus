@@ -7,7 +7,7 @@
     <div>这是myChildSon</div>
     <div class="myChild">
       <div>count: {{state.count}}</div>
-      <div >injectA: {{injectA}} <el-button type="primary" @click="bindEdit">修改provide</el-button> </div>
+      <div >injectA: {{injectA}}  <el-input type="text" v-model="injectA" /> ---------- <el-button type="primary" @click="bindEdit">修改provide</el-button> </div>
       <div>prpos: {{prpos.modelValue}}</div>
       <div @click="changUpdate">使用update 修改父级数据</div>
     </div>
@@ -46,8 +46,8 @@ const state = reactive({
 })
 const prpos = defineProps({
   modelValue: {
-    type: Object,
-    default: () => {}
+    type: String,
+    default: ''
   }
 })
 let injectA = inject('provideA');

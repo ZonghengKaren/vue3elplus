@@ -201,8 +201,20 @@ const myFun = () => {
   // }
   // console.log(sum); // 9
 
-  console.log(window.isNaN('abc'));
-  console.log(Number.isNaN('abc'));
+  // console.log(window.isNaN('abc'));
+  // console.log(Number.isNaN('abc'));
+
+  // a(); // 使用var let const 都会报错
+  // var a = function() {
+  //   console.log(222);
+  // }
+
+  const key = Symbol('a');
+  const obj = {
+    [key]: 1
+  }
+  console.log(JSON.stringify(obj) === '{}');
+  console.log(Reflect.ownKeys(obj).length === 0);
 }
 
 </script>

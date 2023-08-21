@@ -4,7 +4,7 @@
     <div>data: {{state.data}}</div>
     <div>arr: {{state.arr}}</div>
     <div>syncData: {{state.syncData}}</div>
-    <div>provideA: {{state.provideA}}</div>
+    <div>provideA: {{provideA}} <el-input type="text" v-model="provideA" /> </div>
     <div>str: {{str}}</div>
     <div>vuex-aa: {{aa}}</div>
     <div @click="bindChangParent">props: arr1 - {{props.arr1 ? props.arr1[0] : '---空数据--'}}</div>
@@ -28,13 +28,15 @@ const state = reactive({
   },
   arr:[3333],
   syncData: 'aaaaa',
-  provideA: ['11']
+  provideA: 11
 })
 
-provide('provideA', state.provideA);
+let provideA = ref(2222);
+console.log(provideA);
+provide('provideA', provideA);
 provide('editProvideA', (res) => {
-  console.log(res);
-  state.provideA.push(res);
+  provideA += res;
+  state.count +=1;
 })
 
 const str = '这个是不需要响应时的数据';
@@ -55,7 +57,7 @@ const bindChangParent = () => {
 
 const aa = computed(() => { return useStore().state.test.title})
 watch(
-    () =>  ['state.count'],
+    () =>  [state.count, provideA],
     (oldVal, newVal) => {
       console.log(oldVal, newVal)
     },
