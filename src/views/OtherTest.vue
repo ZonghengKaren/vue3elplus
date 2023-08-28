@@ -35,9 +35,20 @@
         </div>
 
         <!--DOM事件流-->
-      <div class="dom1" @click.stop="bindDom('1')">
-        <div class="dom2" @click.stop="bindDom('2')"></div>
-      </div>
+        <div class="dom1" @click.stop="bindDom('1')">
+          <div class="dom2" @click.stop="bindDom('2')"></div>
+        </div>
+
+        <!--flex-->
+        <div class="flex">
+            <div class="box1">
+                <p>34243423423432</p>
+            </div>
+            <div class="box2">
+                <p>5645ffsff</p>
+                <p>7567657567</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -288,6 +299,17 @@ const myFun = () => {
     }
     100% {
         transform: scale(1) translate(0);
+    }
+}
+.flex {
+    display: flex;
+    height: 400px;
+    align-items: baseline;
+    &>div {
+        flex: 1;
+        padding: 10px;
+        background-color: #2c3e50;
+        margin: 10px;
     }
 }
 </style>
