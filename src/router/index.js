@@ -30,6 +30,11 @@ const routes = [
     name: 'CssTest',
     component: () => import('@/views/CssTest.vue')
   },
+  {
+    path: '/eschortest',
+    name: 'eschortest',
+    component: () => import('@/views/EschorTest.vue')
+  },
   // {
   //   path: '/pinia',
   //   name: 'pinia',

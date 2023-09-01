@@ -3,7 +3,8 @@
   <router-link to="/about">About</router-link> |
   <router-link to="/elform">Elform</router-link> | 
   <router-link to="/otherTest">OtherTest</router-link> |
-  <router-link to="/pinia">Pinia</router-link> 
+  <router-link to="/pinia">Pinia</router-link> |
+  <router-link to="/eschortest">EschorTest</router-link>
   <router-view></router-view>
 </template>
 <script>
