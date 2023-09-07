@@ -3,32 +3,26 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--    <meta name="viewport"-->
-<!--          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script>
-        (function () {
-            // 在标准 375px 适配下，100px = 1rem;
-            let baseFontSize = 100;
-            let baseWidth = 375;
-            let set = function () {
-                let clientWidth = document.documentElement.clientWidth || window.innerWidth;
-                let rem = 100;
-                if (clientWidth != baseWidth) {
-                    rem = Math.floor(clientWidth / baseWidth * baseFontSize);
-                }
-                document.querySelector('html').style.fontSize = rem + 'px';
-            }
-            set();
-            window.addEventListener('resize', set);
-        }());
-
-        function fun() {
-            console.log(this.location);
-        }
-        fun();
+        // (function () {
+        //     // 在标准 375px 适配下，100px = 1rem;
+        //     let baseFontSize = 100;
+        //     let baseWidth = 375;
+        //     let set = function () {
+        //         let clientWidth = document.documentElement.clientWidth || window.innerWidth;
+        //         let rem = 100;
+        //         if (clientWidth != baseWidth) {
+        //             rem = Math.floor(clientWidth / baseWidth * baseFontSize);
+        //         }
+        //         document.querySelector('html').style.fontSize = rem + 'px';
+        //     }
+        //     set();
+        //     window.addEventListener('resize', set);
+        // }());
     </script>
 </head>
 <body>

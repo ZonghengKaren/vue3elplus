@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const routes = [
@@ -34,6 +34,16 @@ const routes = [
     path: '/eschortest',
     name: 'eschortest',
     component: () => import('@/views/EschorTest.vue')
+  },
+  {
+    path: '/fbatest',
+    name: 'fbatest',
+    component: () => import('@/views/FbaTest.vue')
+  },
+  {
+    path: '/scopeviewer',
+    name: 'scopeviewer',
+    component: () => import('@/views/ScopeViewer.vue')
   },
   // {
   //   path: '/pinia',

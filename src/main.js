@@ -7,6 +7,7 @@ import {test, resize} from './utils/directive'
 import {changeTheme} from "@/utils/common";
 import installElementPlus from './plugins/element'
 import { vOnClickOutside } from '@vueuse/components'
+import axios from 'axios';
 
 // const pinia = createPinia();
 const app = createApp(App);
@@ -23,6 +24,5 @@ app.directive('resize', resize);
 app.config.errorHandler = (err) => {
     console.log('err:', err);
 }
-
 // app.use(store).use(pinia).use(router).mount('#app')
 app.use(store).use(router).mount('#app')
