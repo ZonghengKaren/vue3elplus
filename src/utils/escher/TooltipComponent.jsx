@@ -74,7 +74,6 @@ class TooltipComponent extends Component {
   initState (nextProps, lastProps) {
     // By default, reaction is not in model
     let reactionInModel = false
-console.log(nextProps.model.reactions.length);
     // If the selected map object is a reaction and there is a model, collect the necessary
     // flux data and calculate placement of arrows and current flux label.
     // Otherwise, only pass the type to the tooltip.
@@ -294,7 +293,6 @@ console.log(nextProps.model.reactions.length);
   render () {
     if (this.state.type === 'reaction' && this.state.reactionInModel) {
       // get state of max and min buttons
-      console.log(Object.keys(this.props.objectives).length);
       const minimizeActive = this.props.objectives[this.props.biggId] === -1
       const minimizeDisabled = Object.keys(this.props.objectives).length === 1 && minimizeActive
       const maximizeActive = this.props.objectives[this.props.biggId] === 1

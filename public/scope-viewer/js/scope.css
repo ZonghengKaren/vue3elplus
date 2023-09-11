@@ -48,7 +48,7 @@ body {
 /* Title **************************************************************/
 #title {
     text-align: center;
-    font-size: 2em;
+    font-size: 16px;
     padding-top: 15px;
     padding-bottom: 15px;
     font-family: sans-serif;
@@ -56,7 +56,7 @@ body {
 
 /* Viewer *************************************************************/
 #viewer {
-    height: 80%;
+    height: 98%;
     box-shadow: 0 0 5px 0px black;
 }
 

@@ -12,7 +12,6 @@ window.onInitScope = function (cb) {
     });
 
     function LoadScope() {
-        console.log('5555555555555555555');
         var reader = new FileReader();
         var file = document.getElementById("jsonFile").files[0];
         var filename = file.name;

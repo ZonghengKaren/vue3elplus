@@ -1,7 +1,7 @@
 <template>
-    <FbaCmm></FbaCmm>
+    <EscherFba></EscherFba>
 </template>
 
 <script setup>
-import FbaCmm from "@/components/FbaCmm.vue";
+import EscherFba from "@/components/EscherFba.vue";
 </script>

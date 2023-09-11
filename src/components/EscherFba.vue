@@ -1,12 +1,10 @@
 <template>
-    <div id="FbaCmm" class='App'>
+    <div id="EscherFba" class='App'>
         <div class="EscherContainer" id="EscherContainer"></div>
     </div>
 </template>
 
 <script setup>
-
-// import Help from './Help.js'
 import * as cobra from '@/utils/escher/cobra.js';
 import * as escher from 'escher';
 import modelData from '@/utils/escher/data/E coli core.json';
@@ -16,6 +14,7 @@ import TooltipComponent from '@/utils/escher/TooltipComponent.jsx';
 const underscore = escher.libs.underscore;
 const cobraWorker = new CobraWorker();
 let setReactionData = false;
+
 /**
  * 初始化响应式数据
  */
@@ -47,7 +46,7 @@ let state = reactive({
             setObjective(reaction.id, reaction.objective_coefficient)
         }
     }
-    runThrottledOptimization();
+    myRunThrottledOptimization();
 
     // 初始化escher-builder 实例
      nextTick(() => {
@@ -61,14 +60,11 @@ let state = reactive({
 watch(
     () => state,
     (newVal, oldVal) => {
-        // console.log(state.builder);
         if (newVal && state.builder && newVal.reactionData) {
-            console.log('11111111---------')
             mySetPassProps(newVal);
             const reactionNewData = JSON.parse(JSON.stringify(newVal.reactionData));
             const reactionOldData = oldVal.reactionData ? JSON.parse(JSON.stringify(oldVal.reactionData)) : {};
             if (reactionNewData !== reactionOldData && !setReactionData)  {
-                console.log('555555-----------------')
                 state.builder.set_reaction_data(reactionNewData);
                 setReactionData = true;
             }
@@ -82,26 +78,24 @@ watch(
  * @description 初始化escher-builder实例
  */
 const myInitBuilder = () => {
-    // eslint-disable-next-line no-new
     new escher.Builder(state.map, state.model, null, escher.libs.d3_select('#EscherContainer'), {
         menu: 'all',
-        // use the smooth pan and zoom option
         fill_screen: false,
         enable_keys: true,
         tooltip_component: TooltipComponent,
         enable_keys_with_tooltip: false,
         reaction_styles: ['color', 'size', 'text', 'abs'],
-        disabled_buttons: ['Load reaction data', 'Load gene data'],
+        disabled_buttons: ['Load reaction data'],
         never_ask_before_quit: true,
         first_load_callback: builder => {
             state.builder = builder;
 
-            // when the model loads in escher, pass the data along
+            // 加载模型数据回调
             builder.callback_manager.set('load_model', modelData => {
                 loadModel(modelData);
             })
 
-            // when a map loads, need to update the tooltip_component props
+            // 加载地图数据回调
             builder.callback_manager.set('load_map', mapData => {
                 mySetPassProps(state)
             })
@@ -114,7 +108,7 @@ const myInitBuilder = () => {
  * @description 求解新的模型参数并更新reactionData和objectiveFlux以反映这些变化
  *
  */
-const runOptimization = () => {
+const myRunOptimization = () => {
     let reactionData = null;
     let objectiveFlux = 'Infeasible solution/Dead cell';
     const modelData = JSON.parse(JSON.stringify(state.model));
@@ -134,8 +128,8 @@ const runOptimization = () => {
  * 自定义函数
  * @description
  */
-const runThrottledOptimization = () => {
-    underscore.throttle(runOptimization(), 300);
+const myRunThrottledOptimization = () => {
+    underscore.throttle(myRunOptimization(), 300);
 };
 
 /**
@@ -166,7 +160,7 @@ const loadModel = (newModel) => {
     state.oldModel = oldModel;
     state.objectives = objectives;
     state.compoundObjectives = Object.keys(objectives).length > 1;
-    runThrottledOptimization();
+    myRunThrottledOptimization();
 }
 
 /**
@@ -187,21 +181,24 @@ const sliderChange = (bounds, biggId) => {
         }
     }
     setReactionData = false;
-    runThrottledOptimization()
+    myRunThrottledOptimization()
 }
+
+/**
+ * 自定义函数 - 给tooltip组件传递指定参数
+ * @param { Object } props 参数对象
+ */
 const mySetPassProps = (props) => {
     props.sliderChange = sliderChange;
     props.setObjective = setObjective;
-    console.log(props);
     state.builder.tooltip_container.passProps(props)
 }
 
 /**
- * Handles the Reset Map button press. Resets state and objective function to
- * the original model and finds the set of fluxes.
+ * 事件函数 - 点击重置地图
+ * @description 官方扩展方法 （暂时不用）
  */
-const resetMap = () => {
-    // load the original model
+const bindResetMap = () => {
     const model = cobra.modelFromJsonData(state.modelData);
     const reactions = model.reactions;
     const objectives = {};
@@ -215,17 +212,15 @@ const resetMap = () => {
     state.objectives = objectives;
     state.compoundObjectives = Object.keys(objectives).length > 1;
     setReactionData = false;
-    runThrottledOptimization();
+    myRunThrottledOptimization();
 }
 
 /**
- * Loops through the list of reactions setting all objective coefficients to 0
- * except for the one matching the given BiGG ID which it sets to 1.
- * Subsequently finds the new set of fluxes and sets the state of
- * reactionData, changes the model in state, and tracks the current objective
- * in the currentObjective state.
- * @param {string} biggId - BiGG ID of the reaction.
- * @param {number} coefficient - Either positive or negative 1 for maximization and minimization
+ * 事件函數
+ * 循环浏览将所有目标系数设置为0的反应列表除了与它设置为1的给定BiGG ID匹配的那个。
+ * 随后找到新的通量集，并设置reactionData，更改状态中的模型，并跟踪当前目标处于当前目标状态。
+ * @param｛string｝biggId-反应的BiGG ID。
+ * @param｛number｝coefficient-正或负1用于最大化和最小化
  */
 const setObjective = (biggId, coefficient) => {
     const reactions = [...state.model.reactions];
@@ -254,10 +249,14 @@ const setObjective = (biggId, coefficient) => {
     state.model = { ...prevModel, reactions };
     state.objectives = objectives;
     setReactionData = false;
-    runThrottledOptimization();
+    myRunThrottledOptimization();
 }
 
-const toggleCompoundObjectives = () => {
+/**
+ * 事件函數 - 切換化合物目标
+ * @description 官方扩展方法 （暂时不用）
+ */
+const bindToggleCompoundObjectives = () => {
     state.compoundObjectives = !state.compoundObjectives;
     if (!state.compoundObjectives) {
         const model = cobra.modelFromJsonData(state.modelData)
@@ -270,48 +269,9 @@ const toggleCompoundObjectives = () => {
         }
     }
 }
-
-/**
- * 自定义函数
- */
-const shouldComponentUpdate = () => {
-    return false;
-}
-
-/**
- * 自定义函数
- */
-const kosAddGroup = (builder) => {
-    // at the beginning
-    state.koMarkersSe = builder.selection
-        .select('.zoom-g')
-        .append('g').attr('id', 'ko-markers');
-}
-
-/**
- *
- * @param {string[]} reactionList - List of knocked out reactions.
- */
-const koDrawRectanges = (reactionList) => {
-    if (state.koMarkersSel === null) {
-        console.warn('state.koMarkersSel is not defined')
-        return
-    }
-    // every time this changes
-    const sel = state.koMarkersSel.selectAll('.ko')
-        .data(['GAPD']);
-    const g = sel.enter()
-        .append('g')
-    g.append('rect')
-        .style('fill', 'red')
-    g.append('rect')
-        .style('fill', 'red')
-}
-
-
 </script>
 <style lang="scss" scoped>
-#FbaCmm {
+#EscherFba {
     width: 90%;
     height: 800px;
     margin: 0 auto;

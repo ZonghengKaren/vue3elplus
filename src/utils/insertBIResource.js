@@ -1,3 +1,9 @@
+/**
+ * 单个资源插入操作
+ * @param {String} src 单个资源对象
+ * @param {Object} parentEl
+ * @returns {Promise<unknown>}
+ */
 export const dynamicLoadScript = function (src, parentEl) {
     return new Promise((resolve, reject) => {
         if(src.type === 'js'){
@@ -26,7 +32,12 @@ export const dynamicLoadScript = function (src, parentEl) {
     });
 }
 
-// 动态加载多条js
+/**
+ * 动态加载多条js
+ * @param {Array} urls 资源数据集合
+ * @param {Object} parentEl 父节点（资源插入到指定的节点内部）
+ * @returns {Promise<Awaited<unknown>[]>}
+ */
 export const loadAllResource = function (urls, parentEl = null) {
     return Promise.all(urls.map((url) => dynamicLoadScript(url, parentEl)));
 }
