@@ -62,26 +62,6 @@ const bindFirstLoadCallback = (res) => {
         }
         state.mapDataLen = len;
     }, 5000)
-    console.log('firstLoadCallback:', res);
-
-    res.callback_manager.run('saved_map', obj => {
-        console.log('--------:', obj);
-    })
-    res.callback_manager.set('saved_map', obj => {
-        console.log('00000000000000', obj);
-    })
-    res.callback_manager.set('create_reaction', obj => {
-        console.log('111111111111111', obj);
-    })
-    res.callback_manager.set('update_membrane', obj => {
-        console.log('222222222222222', obj);
-    })
-    res.callback_manager.set('update_segment', obj => {
-        console.log('33333333333333', obj);
-    })
-    res.callback_manager.set('update_bezier', obj => {
-        console.log('5555555555555', obj);
-    })
 }
 
 /**

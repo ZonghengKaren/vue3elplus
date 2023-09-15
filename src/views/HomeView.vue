@@ -3,17 +3,20 @@
     <div>
       <el-button type="primary" @click="$router.push('/elform')">表单验证</el-button>
     </div>
-    {{state.data}}-------{{plusOne}}
+    {{state.data}}-------
     <div class="vuex-fontszie">vuex: 全局title {{$store.state.title}}</div>
     <div>vuex: 模块test 里面的title {{$store.state.test.title}} ---- {{store_title}}</div>
     <div @click="editTitle">修改vuex-test模块的title</div>
     <div @click="bindClick">新增</div>
     <div @click="$router.push('/about')">跳转</div>
     <el-button type="primary" @click.stop="goAbout">事件跳转</el-button>
-    <div v-for="item in datalist" :key="item.id">
+      <div>-------------datalist-----------</div>
+    <div v-for="item in curData.datalist" :key="item.id">
       <div>{{item.username}}</div>
       <div>{{item.phone}}</div>
     </div>
+      <div>-------------datalist2-----------</div>
+      <div>{{curData.datalist2}}</div>
   </div>
 </template>
 
@@ -29,28 +32,28 @@ export default {
   },
   setup() {
     let state = ref({});
-    let datalist = ref([]);
-    let datalist2 = ref([]);
+    let curData = reactive({
+        datalist: [],
+        datalist2: 0,
+    })
 
     onMounted(() => {
       state.value.data = 1;
-      getdata();
+      getdata(0);
+      getdata(1);
+      getdata(2);
+      getdata(3);
       getdata2();
     })
 
     /**
      * 监听属性
      */
-    const plusOne = computed(() =>  state.value.data + 1 );
-
-    /**
-     * 监听属性
-     */
     watch(
-        () => [state.value.data, datalist.value],
+        () => [state.value.data, curData.datalist],
         async (newValue, oldValue) => {
           // newValue === oldValue
-          console.log(newValue, oldValue)
+          // console.log(newValue, oldValue)
         },
         { deep: true}
     )
@@ -59,28 +62,26 @@ export default {
      * 状态管理
      */
     const store = useStore();
-    console.log(store.state.title);
 
-    let getdata = async () => {
+    let getdata = async (data) => {
       try {
-        const res = await service.get('/users');
-        console.log(res);
-        datalist.value = res;
-        const arr = datalist.value.map((item) => {return item.username});
-        console.log(arr);
+        const res0 = await service.apiGet('/users', {halfwayCancel: true, num: data});
+        console.log('/users----', res0);
+        curData.datalist = res0;
+        const arr = curData.datalist.map((item) => {return item.username});
       } catch (err) {
-        console.log(err)
+        console.log('datalist-----', err)
       }
 
     }
 
     let getdata2 = async () => {
       try {
-        const res = await service.get('/posts');
-        datalist2.value = res;
-        console.log(datalist2);
+          const res0 = await service.apiPost('/posts', {halfwayCancel: true, t: 1});
+          console.log('/posts----', res0);
+          curData.datalist2 = res0 ? res0.length : 0;
       } catch (err) {
-        console.log(err);
+        console.log('datalist2-err:---', err);
       }
 
     }
@@ -100,9 +101,7 @@ export default {
     }
 
     return {
-      state,
-      datalist,
-      plusOne,
+      state, curData,
       store_title: computed(() => store.state.test.title),
       bindClick,
       editTitle,
