@@ -1,7 +1,7 @@
 <template>
     <div id="map_container_1" style="width: 100%;height: 700px" v-if="state.showDemo"></div>
     <div class="selectBox">
-        <el-select v-model="state.model" placeholder="Select" @change="bindChangeModel" :disabled="!state.showDemo">
+        <el-select v-model="state.map" placeholder="Select" @change="bindChangeModel" :disabled="!state.showDemo">
             <el-option
                 v-for="item in selectData"
                 :key="item"
