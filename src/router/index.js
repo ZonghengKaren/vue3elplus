@@ -45,6 +45,11 @@ const routes = [
     name: 'scopeviewer',
     component: () => import('@/views/ScopeViewer.vue')
   },
+  {
+    path: '/d3flux',
+    name: 'd3flux',
+    component: () => import('@/views/D3Flux.vue')
+  },
   // {
   //   path: '/pinia',
   //   name: 'pinia',

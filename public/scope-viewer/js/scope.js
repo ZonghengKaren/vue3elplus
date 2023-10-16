@@ -5,7 +5,6 @@
 
 window.onInitScope = function (cb) {
     putDefaultInfo();
-
     var cy = window.cy = cytoscape({
         container: document.getElementById('cy'),
         motionBlur: true
@@ -22,7 +21,7 @@ window.onInitScope = function (cb) {
             var Scope = event.target.result ? JSON.parse(event.target.result) : {};
             drawAttempt(Scope, basename);
         };
-    };
+    }
 
     /**
      * 视图

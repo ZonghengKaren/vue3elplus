@@ -56,12 +56,16 @@ const bindFirstLoadCallback = (res) => {
     if (interVal) { clearInterval(interVal) }
     interVal = setInterval(() => {
         const len = Object.keys(res.map_data[1].nodes).length;
-        console.log(len);
+        // console.log(len);
         if (len !== state.mapDataLen) {
             // 异步处理 刷新数据列表
         }
         state.mapDataLen = len;
     }, 5000)
+    console.log(res);
+    res.callback_manager.run('select_selectable', modelData => {
+        console.log('select_selectable-----', modelData);
+    })
 }
 
 /**
